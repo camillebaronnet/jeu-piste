@@ -3,15 +3,10 @@
 ### Script to validate players
 STEP="STEP 3 : MY PLAYERS"
 
-HISTORY_NAME="history_step3"
-HISTORY="/tmp/$HISTORY_NAME"
-
-EMAIL_PROF=j.marjollet@bh-technologies.com
-
 TEAM_FILE="my_team.txt"
-EMAIL=`cat $TEAM_FILE | grep -i mail | tr --delete ' ' | cut -d '=' -f 2`
-TEAM_NAME=`cat $TEAM_FILE | grep -i name | tr --delete ' ' | cut -d '=' -f 2`
-MOTTO=`cat $TEAM_FILE | grep -i motto | tr --delete ' ' | cut -d '=' -f 2`
+EMAIL=`grep -i mail $TEAM_FILE | cut -d '=' -f 2`
+TEAM_NAME=`grep -i name $TEAM_FILE | cut -d '=' -f 2`
+MOTTO=`grep -i motto $TEAM_FILE | cut -d '=' -f 2`
 
 PLAYERS_FOLDER="My_Players"
 SPONSORS_FOLDER="My_Sponsors"
@@ -56,6 +51,4 @@ then
     echo -e "\n\e[31mFAIL\e[0m : Your players cost exceeded your total budget : $TOTAL_COST / $TOTAL_BUDGET"
 else    
     echo -e "\n\e[92mSUCCESS\e[0m : Your total level is ""$TOTAL_LEVEL | Your players cost : $TOTAL_COST / $TOTAL_BUDGET"
-    cp ~/.bash_history /tmp/$HISTORY_NAME
-    echo $'Step 3 : OK\n'"User: $EMAIL"$'\n'"Team_Name: $TEAM_NAME"$'\n'"Motto: $MOTTO"$'\n' | mail -s "[$STEP][$TEAM_NAME]" -A $HISTORY $EMAIL_PROF
 fi

