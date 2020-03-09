@@ -3,11 +3,6 @@
 ### Script to validate players
 STEP="STEP 5 : EUROPEAN COMPETITION"
 
-HISTORY_NAME="history_step5"
-HISTORY="/tmp/$HISTORY_NAME"
-
-EMAIL_PROF=j.marjollet@bh-technologies.com
-
 TEAM_FILE="my_team.txt"
 EMAIL=`cat $TEAM_FILE | grep -i mail | tr --delete ' ' | cut -d '=' -f 2`
 TEAM_NAME=`cat $TEAM_FILE | grep -i name | tr --delete ' ' | cut -d '=' -f 2`
@@ -104,6 +99,4 @@ then
     done
 else
     echo -e "\n\e[92mSUCCESS\e[0m : You won the competition !"
-    cp ~/.bash_history /tmp/$HISTORY_NAME
-    echo $'Step 5 : OK\n'"User: $EMAIL"$'\n'"Team_Name: $TEAM_NAME"$'\n'"Motto: $MOTTO"$'\n' | mail -s "[$STEP][$TEAM_NAME]" -a $HISTORY $EMAIL_PROF
 fi    

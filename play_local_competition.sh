@@ -3,16 +3,10 @@
 ### Script to validate players
 STEP="STEP 4 : MY FIRST COMPETITION"
 
-HISTORY_NAME="history_step4"
-HISTORY="/tmp/$HISTORY_NAME"
-
-EMAIL_PROF=j.marjollet@bh-technologies.com
-FROM_EMAIL=ops@campus-numerique-in-the-alps.com
-
 TEAM_FILE="my_team.txt"
-EMAIL=`cat $TEAM_FILE | grep -i mail | tr --delete ' ' | cut -d '=' -f 2`
-TEAM_NAME=`cat $TEAM_FILE | grep -i name | tr --delete ' ' | cut -d '=' -f 2`
-MOTTO=`cat $TEAM_FILE | grep -i motto | tr --delete ' ' | cut -d '=' -f 2`
+EMAIL=`grep mail $TEAM_FILE | cut -d '=' -f 2`
+TEAM_NAME=`grep name $TEAM_FILE | cut -d '=' -f 2`
+MOTTO=`grep motto $TEAM_FILE | cut -d '=' -f 2`
 
 SPONSORS_FOLDER="My_Sponsors"
 COMPETITION_FOLDER="Local_Competition"
@@ -90,6 +84,4 @@ then
     echo -e "\n\e[31mFAIL\e[0m : You have lost the competition, try to recruite better players !"
 else
     echo -e "\n\e[92mSUCCESS\e[0m : You won the competition !"
-    cp ~/.bash_history /tmp/$HISTORY_NAME
-    echo $'Step 4 : OK\n'"User: $EMAIL"$'\n'"Team_Name: $TEAM_NAME"$'\n'"Motto: $MOTTO"$'\n' | mail -s "[$STEP][$TEAM_NAME]" -A $HISTORY -r $FROM_EMAIL $EMAIL_PROF
 fi    
